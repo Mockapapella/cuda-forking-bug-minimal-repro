@@ -1,6 +1,6 @@
 # CUDA Error 3 Reproduction
 
-This repository contains a minimal reproduction of the "CUDA failure 3" error that occurs when using CUDA with Gunicorn's forking model.
+This repository contains a minimal reproduction of the "Cannot re-initialize CUDA in forked subprocess." error that occurs when using CUDA with Gunicorn's forking model.
 
 ## The Issue
 
