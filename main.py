@@ -37,5 +37,15 @@ async def root():
 
 
 if __name__ == "__main__":
+    # Device detection logic
+    if torch.backends.mps.is_available():
+        DEVICE_TYPE = "MPS"
+    elif torch.cuda.is_available():
+        DEVICE_TYPE = "GPU"
+        print(f"GPU detected: {torch.cuda.get_device_name(0)}")
+    else:
+        DEVICE_TYPE = "CPU"
+    
+    print(f"Parent process {os.getpid()} using device: {DEVICE_TYPE}")
     print("Running directly (will work)")
     uvicorn.run(app, host="0.0.0.0", port=8000)
