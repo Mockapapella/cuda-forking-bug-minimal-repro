@@ -1,4 +1,4 @@
-# CUDA Error 3 Reproduction
+# tl;dr
 
 This repository contains a minimal reproduction of the "Cannot re-initialize CUDA in forked subprocess." error that occurs when using CUDA with Gunicorn's forking model.
 
