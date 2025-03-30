@@ -1,15 +1,14 @@
 """Minimal FastAPI app that demonstrates CUDA fork issue."""
 
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 import os
 import torch
 import uvicorn
 
-app = FastAPI()
 
-
-@app.on_event("startup")
-async def startup_event():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
     pid = os.getpid()
     print(f"Worker process {pid} initializing CUDA...")
 
@@ -25,6 +24,11 @@ async def startup_event():
     except Exception as e:
         print(f"Worker process {pid} CUDA error: {e}")
         raise
+    
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
 
 
 @app.get("/")
